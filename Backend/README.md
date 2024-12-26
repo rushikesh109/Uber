@@ -202,3 +202,93 @@ The endpoint will:
 - Return success message
 
 Authentication via JWT token is required for this endpoint.
+
+# Captain API Documentation
+
+## Register Captain
+Creates a new captain account and returns an authentication token.
+
+**Endpoint:** `POST /captains/register`
+
+### Request Body
+```json
+{
+  "fullname": {
+    "firstname": "string",  // minimum 3 characters
+    "lastname": "string"    // minimum 3 characters
+  },
+  "email": "string",        // valid email format
+  "password": "string",     // minimum 6 characters
+  "vechile": {
+    "color": "string",      // minimum 3 characters
+    "plate": "string",      // minimum 3 characters
+    "capacity": "number",   // minimum 1
+    "vechileType": "string" // must be 'car', 'motorcycle', or 'auto'
+  }
+}
+```
+
+### Response
+
+#### Success Response
+**Code:** 201 CREATED
+```json
+{
+  "token": "jwt_token_string",
+  "captain": {
+    "fullname": {
+      "firstname": "string",
+      "lastname": "string"
+    },
+    "email": "string",
+    "vechile": {
+      "color": "string",
+      "plate": "string", 
+      "capacity": number,
+      "vechileType": "string"
+    },
+    "status": "inactive",
+    "_id": "string"
+  }
+}
+```
+
+#### Error Responses
+
+**Code:** 400 BAD REQUEST
+```json
+{
+  "errors": [
+    {
+      "msg": "Firstname must be at least 3 characters long",
+      "path": "fullname.firstname"
+    },
+    {
+      "msg": "Please enter a valid email",
+      "path": "email"
+    },
+    {
+      "msg": "Vechile type must be one of car, motorcycle, auto",
+      "path": "vechile.vechileType"
+    }
+  ]
+}
+```
+
+### Required Fields Validation
+- `fullname.firstname`: String, minimum 3 characters
+- `fullname.lastname`: String, minimum 3 characters  
+- `email`: Valid email format
+- `password`: String, minimum 6 characters
+- `vechile.color`: String, minimum 3 characters
+- `vechile.plate`: String, minimum 3 characters
+- `vechile.capacity`: Number, minimum 1
+- `vechile.vechileType`: String, must be one of: 'car', 'motorcycle', 'auto'
+
+The password will be automatically hashed before storage and a JWT token will be generated upon successful registration. The captain's initial status will be set to 'inactive'.
+
+This documentation is based on the implementation in:
+- [`captainRoutes`](Backend/routes/captain.routes.js)
+- [`captainController`](Backend/controllers/captain.controller.js)
+- [`captainModel`](Backend/models/captain.model.js)
+- [`captainService`](Backend/services/captain.service.js)
