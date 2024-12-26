@@ -292,3 +292,135 @@ This documentation is based on the implementation in:
 - [`captainController`](/Backend/controllers/captain.controller.js)
 - [`captainModel`](/Backend/models/captain.model.js)
 - [`captainService`](/Backend/services/captain.service.js)
+
+## Login Captain
+Authenticates a captain account and returns an authentication token.
+
+**Endpoint:** `POST /captains/login`
+
+### Request Body
+```json
+{
+  "email": "string",    // valid email format 
+  "password": "string"  // minimum 6 characters
+}
+```
+
+### Response 
+
+#### Success Response
+**Code:** 200 OK
+```json
+{
+  "token": "jwt_token_string",
+  "captain": {
+    "fullname": {
+      "firstname": "string",
+      "lastname": "string" 
+    },
+    "email": "string",
+    "vechile": {
+      "color": "string",
+      "plate": "string",
+      "capacity": number,
+      "vechileType": "string"
+    },
+    "status": "string",
+    "_id": "string"
+  }
+}
+```
+
+#### Error Responses
+
+**Code:** 400 BAD REQUEST
+```json
+{
+  "message": "Invalid email or password"
+}
+```
+
+### Required Fields Validation
+- `email`: Valid email format
+- `password`: String, minimum 6 characters
+
+## Get Captain Profile
+Retrieves the profile information of the authenticated captain.
+
+**Endpoint:** `GET /captains/profile`
+
+### Headers
+```json
+{
+  "Authorization": "Bearer jwt_token_string"
+}
+```
+
+### Response
+
+#### Success Response 
+**Code:** 200 OK
+```json
+{
+  "captain": {
+    "fullname": {
+      "firstname": "string",
+      "lastname": "string"
+    },
+    "email": "string",
+    "vechile": {
+      "color": "string",
+      "plate": "string",
+      "capacity": number,
+      "vechileType": "string" 
+    },
+    "status": "string",
+    "_id": "string"
+  }
+}
+```
+
+#### Error Response
+**Code:** 401 UNAUTHORIZED
+```json
+{
+  "message": "Unauthorized"
+}
+```
+
+## Logout Captain
+Logs out the current captain by invalidating their token.
+
+**Endpoint:** `GET /captains/logout`
+
+### Headers
+```json
+{
+  "Authorization": "Bearer jwt_token_string"
+}
+```
+
+### Response
+
+#### Success Response
+**Code:** 200 OK
+```json
+{
+  "message": "Logout successfully"
+}
+```
+
+#### Error Response
+**Code:** 401 UNAUTHORIZED
+```json
+{
+  "message": "Unauthorized"
+}
+```
+
+The endpoint will:
+- Clear the auth token cookie
+- Add the token to blacklist
+- Return success message
+
+Authentication via JWT token is required for this endpoint.
