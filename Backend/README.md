@@ -288,7 +288,7 @@ Creates a new captain account and returns an authentication token.
 The password will be automatically hashed before storage and a JWT token will be generated upon successful registration. The captain's initial status will be set to 'inactive'.
 
 This documentation is based on the implementation in:
-- [`captainRoutes`](Backend/routes/captain.routes.js)
-- [`captainController`](Backend/controllers/captain.controller.js)
-- [`captainModel`](Backend/models/captain.model.js)
-- [`captainService`](Backend/services/captain.service.js)
+- [`captainRoutes`](/Backend/routes/captain.routes.js)
+- [`captainController`](/Backend/controllers/captain.controller.js)
+- [`captainModel`](/Backend/models/captain.model.js)
+- [`captainService`](/Backend/services/captain.service.js)
