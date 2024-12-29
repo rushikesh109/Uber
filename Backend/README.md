@@ -219,11 +219,11 @@ Creates a new captain account and returns an authentication token.
   },
   "email": "string",        // valid email format
   "password": "string",     // minimum 6 characters
-  "vechile": {
+  "vehicle": {
     "color": "string",      // minimum 3 characters
     "plate": "string",      // minimum 3 characters
     "capacity": "number",   // minimum 1
-    "vechileType": "string" // must be 'car', 'motorcycle', or 'auto'
+    "vehicleType": "string" // must be 'car', 'motorcycle', or 'auto'
   }
 }
 ```
@@ -241,11 +241,11 @@ Creates a new captain account and returns an authentication token.
       "lastname": "string"
     },
     "email": "string",
-    "vechile": {
+    "vehicle": {
       "color": "string",
       "plate": "string", 
       "capacity": number,
-      "vechileType": "string"
+      "vehicleType": "string"
     },
     "status": "inactive",
     "_id": "string"
@@ -268,8 +268,8 @@ Creates a new captain account and returns an authentication token.
       "path": "email"
     },
     {
-      "msg": "Vechile type must be one of car, motorcycle, auto",
-      "path": "vechile.vechileType"
+      "msg": "vehicle type must be one of car, motorcycle, auto",
+      "path": "vehicle.vehicleType"
     }
   ]
 }
@@ -280,10 +280,10 @@ Creates a new captain account and returns an authentication token.
 - `fullname.lastname`: String, minimum 3 characters  
 - `email`: Valid email format
 - `password`: String, minimum 6 characters
-- `vechile.color`: String, minimum 3 characters
-- `vechile.plate`: String, minimum 3 characters
-- `vechile.capacity`: Number, minimum 1
-- `vechile.vechileType`: String, must be one of: 'car', 'motorcycle', 'auto'
+- `vehicle.color`: String, minimum 3 characters
+- `vehicle.plate`: String, minimum 3 characters
+- `vehicle.capacity`: Number, minimum 1
+- `vehicle.vehicleType`: String, must be one of: 'car', 'motorcycle', 'auto'
 
 The password will be automatically hashed before storage and a JWT token will be generated upon successful registration. The captain's initial status will be set to 'inactive'.
 
@@ -319,11 +319,11 @@ Authenticates a captain account and returns an authentication token.
       "lastname": "string" 
     },
     "email": "string",
-    "vechile": {
+    "vehicle": {
       "color": "string",
       "plate": "string",
       "capacity": number,
-      "vechileType": "string"
+      "vehicleType": "string"
     },
     "status": "string",
     "_id": "string"
@@ -368,11 +368,11 @@ Retrieves the profile information of the authenticated captain.
       "lastname": "string"
     },
     "email": "string",
-    "vechile": {
+    "vehicle": {
       "color": "string",
       "plate": "string",
       "capacity": number,
-      "vechileType": "string" 
+      "vehicleType": "string" 
     },
     "status": "string",
     "_id": "string"
