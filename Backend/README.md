@@ -424,3 +424,128 @@ The endpoint will:
 - Return success message
 
 Authentication via JWT token is required for this endpoint.
+
+# Maps API Documentation
+
+## Get Coordinates
+Converts an address into geographic coordinates.
+
+**Endpoint:** `GET /maps/get-coordinates`
+
+### Query Parameters
+- `address`: String (minimum 3 characters)
+
+### Headers
+```json
+{
+  "Authorization": "Bearer jwt_token_string"
+}
+```
+
+### Response
+
+#### Success Response
+**Code:** 200 OK
+```json
+{
+  "coordinates": {
+    "ltd": number,
+    "lng": number
+  }
+}
+```
+
+#### Error Response
+**Code:** 400 BAD REQUEST
+```json
+{
+  "errors": [
+    {
+      "msg": "Address must be at least 3 characters long",
+      "path": "address"
+    }
+  ]
+}
+```
+
+## Get Distance and Time
+Calculates distance and duration between two locations.
+
+**Endpoint:** `GET /maps/get-distance-time`
+
+### Query Parameters
+- `origin`: String (minimum 3 characters)
+- `destination`: String (minimum 3 characters)
+
+### Headers
+```json
+{
+  "Authorization": "Bearer jwt_token_string"
+}
+```
+
+### Response
+
+#### Success Response
+**Code:** 200 OK
+```json
+{
+  "distance": "string",
+  "duration": "string"
+}
+```
+
+#### Error Response
+**Code:** 400 BAD REQUEST
+```json
+{
+  "message": "Both origin and destination are required"
+}
+```
+
+## Get Location Suggestions
+Returns autocomplete suggestions for a location query.
+
+**Endpoint:** `GET /maps/get-suggestions`
+
+### Query Parameters
+- `input`: String (minimum 3 characters)
+
+### Headers
+```json
+{
+  "Authorization": "Bearer jwt_token_string"
+}
+```
+
+### Response
+
+#### Success Response
+**Code:** 200 OK
+```json
+[
+  {
+    "description": "string",
+    "place_id": "string",
+    "structured_formatting": {
+      "main_text": "string",
+      "secondary_text": "string"
+    }
+  }
+]
+```
+
+#### Error Response
+**Code:** 400 BAD REQUEST
+```json
+{
+  "errors": [
+    {
+      "msg": "Input must be at least 3 characters long",
+      "path": "input"
+    }
+  ]
+}
+```
+
+Note: All Maps API endpoints require valid JWT token authentication.
