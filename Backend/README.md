@@ -549,3 +549,84 @@ Returns autocomplete suggestions for a location query.
 ```
 
 Note: All Maps API endpoints require valid JWT token authentication.
+
+# Ride API Documentation
+
+## Create Ride
+Creates a new ride request.
+
+**Endpoint:** `POST /rides/create`
+
+### Request Body
+```json
+{
+  "pickup": "string",       // minimum 3 characters
+  "destination": "string",  // minimum 3 characters
+  "vehicleType": "string"   // must be 'auto', 'car', or 'moto'
+}
+```
+
+### Headers
+```json
+{
+  "Authorization": "Bearer jwt_token_string"
+}
+```
+
+### Response
+
+#### Success Response
+**Code:** 201 CREATED
+```json
+{
+  "user": "string",
+  "pickup": "string",
+  "destination": "string",
+  "fare": number,
+  "status": "string",
+  "duration": number,
+  "distance": number,
+  "otp": "string",
+  "_id": "string"
+}
+```
+
+#### Error Responses
+
+**Code:** 400 BAD REQUEST
+```json
+{
+  "errors": [
+    {
+      "msg": "Invalid pickup address",
+      "path": "pickup"
+    },
+    {
+      "msg": "Invalid destination address",
+      "path": "destination"
+    },
+    {
+      "msg": "Invalid vehicle type",
+      "path": "vehicleType"
+    }
+  ]
+}
+```
+
+**Code:** 500 INTERNAL SERVER ERROR
+```json
+{
+  "message": "Error message"
+}
+```
+
+### Required Fields Validation
+- `pickup`: String, minimum 3 characters
+- `destination`: String, minimum 3 characters
+- `vehicleType`: String, must be one of: 'auto', 'car', 'moto'
+
+This documentation is based on the implementation in:
+- [`rideRoutes`](Backend/routes/ride.routes.js)
+- [`rideController`](Backend/controllers/ride.controller.js)
+- [`rideModel`](Backend/models/ride.model.js)
+- [`rideService`](Backend/services/ride.service.js)
