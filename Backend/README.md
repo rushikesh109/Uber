@@ -626,7 +626,7 @@ Creates a new ride request.
 - `vehicleType`: String, must be one of: 'auto', 'car', 'moto'
 
 This documentation is based on the implementation in:
-- [`rideRoutes`](Backend/routes/ride.routes.js)
-- [`rideController`](Backend/controllers/ride.controller.js)
-- [`rideModel`](Backend/models/ride.model.js)
-- [`rideService`](Backend/services/ride.service.js)
+- [`rideRoutes`](/Backend/routes/ride.routes.js)
+- [`rideController`](/Backend/controllers/ride.controller.js)
+- [`rideModel`](/Backend/models/ride.model.js)
+- [`rideService`](/Backend/services/ride.service.js)
